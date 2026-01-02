@@ -1,38 +1,66 @@
 <!DOCTYPE html>
 <html lang="mn">
+
 <head>
     <meta charset="UTF-8">
-    <title>Захиалга</title>
+    <title>SS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
-<div class="container page-padding">
+    <div class="container page-padding">
 
-    <div class="section">
-        <h3>🚘 Машин хонуулах захиалга</h3>
+        <div class="section">
+            <h3>🚘 Машин хонуулах захиалга</h3>
 
-        <form method="POST">
-            <label>Өдөр сонгох</label>
-            <select name="date" required>
-                {% for d in days %}
-                <option value="{{ d.date }}" {% if d.full %}disabled{% endif %}>
-                    {{ d.date }} {% if d.full %}(дүүрсэн){% endif %}
-                </option>
-                {% endfor %}
-            </select>
+            <form method="POST">
+                <label>Өдөр сонгох</label>
+                <select name="date" required>
+                    {% for d in days %}
+                    <option value="{{ d.date }}" {% if d.full %}disabled{% endif %}>
+                        {{ d.date }} {% if d.full %}(дүүрсэн){% endif %}
+                    </option>
+                    {% endfor %}
+                </select>
 
-            <label>Улсын дугаар</label>
-            <input type="text" name="plate" placeholder="1234АБВ" required>
+                <label>Улсын дугаар</label>
+                <input type="text" name="plate" placeholder="1234АБВ" required>
 
-            <button type="submit">Захиалах</button>
-        </form>
+                <div class="services">
+                    <p class="services-title">Нэмэлт үйлчилгээ</p>
+
+                    <label class="service-item">
+                        <input type="checkbox" name="services" value="interior">
+                        <span>Доторлогоо</span>
+                    </label>
+
+                    <label class="service-item">
+                        <input type="checkbox" name="services" value="motor">
+                        <span>Мотор угаах</span>
+                    </label>
+
+                    <label class="service-item">
+                        <input type="checkbox" name="services" value="drill">
+                        <span>Drill өнгөлгөө</span>
+                    </label>
+
+                    <label class="service-item">
+                        <input type="checkbox" name="services" value="nano">
+                        <span>Nano наалт</span>
+                    </label>
+                </div>
+
+
+                <button type="submit">Захиалах</button>
+            </form>
+        </div>
+
+        <div class="footer-link">
+            <a href="/">← Буцах</a>
+        </div>
+
     </div>
-
-    <div class="footer-link">
-        <a href="/">← Буцах</a>
-    </div>
-
-</div>
 </body>
+
 </html>

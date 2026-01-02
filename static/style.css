@@ -165,7 +165,8 @@ th {
         font-size: 16px;
     }
 
-    p, li {
+    p,
+    li {
         font-size: 14px;
     }
 }
@@ -208,7 +209,8 @@ form {
     margin-top: 10px;
 }
 
-input, select {
+input,
+select {
     height: 48px;
     font-size: 15px;
 }
@@ -268,13 +270,15 @@ h3 {
 }
 
 /* Текстийг шахна */
-p, li {
+p,
+li {
     font-size: 14px;
     line-height: 1.4;
 }
 
 /* ===== FORM ===== */
-input, select {
+input,
+select {
     height: 44px;
     font-size: 14px;
 }
@@ -307,5 +311,128 @@ button {
 /* Доор CTA дарагдахгүйн тулд */
 .page-padding {
     padding-bottom: 90px;
+}
+
+
+/* ===== SERVICES CHECKBOX ===== */
+
+.services {
+    margin-top: 20px;
+}
+
+.services-title {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.service-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #111;
+    border: 1px solid #222;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.service-item:hover {
+    border-color: #e11d48;
+    background: #161616;
+}
+
+.service-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #e11d48;
+    cursor: pointer;
+}
+
+.service-item span {
+    flex: 1;
+}
+
+
+.price-section {
+    margin-top: 30px;
+}
+
+.price-group {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 14px;
+}
+
+.price-group h4 {
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.price-group p {
+    margin: 4px 0;
+    color: #ccc;
+    font-size: 15px;
+}
+
+.price-group span {
+    color: #e11d48;
+    font-weight: bold;
+}
+
+.price-group.extra {
+    border-color: #e11d48;
+}
+
+
+.logo-box {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-box img {
+    width: 70px;
+    height: auto;
+    margin-bottom: 8px;
+}
+
+.logo-box h1 {
+    color: #fff;
+    font-size: 26px;
+    letter-spacing: 1px;
+}
+
+
+.facebook-btn {
+    display: block;
+    text-align: center;
+    background: #1877f2;
+    color: #fff;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.facebook-btn:hover {
+    opacity: 0.9;
+}
+
+
+.map-btn {
+    display: block;
+    background: #d00000;
+    color: #fff;
+    text-align: center;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    text-decoration: none;
 }
 

@@ -1,85 +1,104 @@
 <!DOCTYPE html>
 <html lang="mn">
+
 <head>
     <meta charset="UTF-8">
     <title>Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
-<div class="container page-padding">
+    <div class="container page-padding">
 
-    <div class="section">
-        <h3>🧑‍💼 Admin – Захиалгууд</h3>
+        <div class="section">
+            <h3>🧑‍💼 Admin – Захиалгууд</h3>
 
-        <form method="GET">
-            <label>Өдөр шүүх</label>
-            <input type="date" name="date" value="{{ selected_date or '' }}">
-            <button type="submit">Шүүх</button>
-            <a href="/admin">Бүгд</a>
-        </form>
+            <form method="GET">
+                <label>Өдөр шүүх</label>
+                <input type="date" name="date" value="{{ selected_date or '' }}">
+                <button type="submit">Шүүх</button>
+                <a href="/admin">Бүгд</a>
+            </form>
+        </div>
+
+        <div class="section">
+            <table>
+                <tr>
+                    <th>Өдөр</th>
+                    <th>Улсын дугаар</th>
+                    <th>Утас</th>
+                    <th>Үйлчилгээ</th>
+                </tr>
+
+                {% for b in bookings %}
+                <tr>
+                    <td>{{ b.date }}</td>
+                    <td>{{ b.plate }}</td>
+                    <td>{{ b.user }}</td>
+                    <td>{{ b.services or "-" }}</td>
+                    <td>
+                        <form method="POST" onsubmit="return confirm('Устгах уу?');">
+                            <input type="hidden" name="delete_id" value="{{ b.id }}">
+                            <button class="danger">❌</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>🚫 Захиалга авахгүй өдөр</h3>
+
+            <form method="POST">
+                <input type="date" name="block_date" required>
+                <button>Өдөр хаах</button>
+            </form>
+
+            <form method="POST">
+                <input type="date" name="unblock_date" required>
+                <button class="secondary">Өдөр нээх</button>
+            </form>
+        </div>
+
+        <div class="section">
+            <h3>➕ Admin-аар машин нэмэх</h3>
+
+            <form method="POST">
+                <input type="hidden" name="admin_add" value="1">
+
+                <label>Өдөр</label>
+                <input type="date" name="date" required>
+
+                <label>Улсын дугаар</label>
+                <input type="text" name="plate" required>
+
+                <button>Нэмэх</button>
+            </form>
+        </div>
+
+        <div class="footer-link">
+            <a href="/">← Нүүр</a>
+            <a href="/admin-logout">🚪 Admin гарах</a>
+        </div>
+
+        <div class="section">
+            <h3>📊 Өдрийн лимит тохируулах</h3>
+
+            <form method="POST">
+                <label>Өдөр</label>
+                <input type="date" name="limit_date" required>
+
+                <label>Машины тоо</label>
+                <input type="number" name="max_cars" min="1" required>
+
+                <button>Тохируулах</button>
+            </form>
+        </div>
+
+
     </div>
-
-    <div class="section">
-        <table>
-            <tr>
-                <th>Өдөр</th>
-                <th>Улсын дугаар</th>
-                <th>Утас</th>
-                <th></th>
-            </tr>
-
-            {% for b in bookings %}
-            <tr>
-                <td>{{ b.date }}</td>
-                <td>{{ b.plate }}</td>
-                <td>{{ b.user }}</td>
-                <td>
-                    <form method="POST" onsubmit="return confirm('Устгах уу?');">
-                        <input type="hidden" name="delete_id" value="{{ b.id }}">
-                        <button class="danger">❌</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-
-    <div class="section">
-        <h3>🚫 Захиалга авахгүй өдөр</h3>
-
-        <form method="POST">
-            <input type="date" name="block_date" required>
-            <button>Өдөр хаах</button>
-        </form>
-
-        <form method="POST">
-            <input type="date" name="unblock_date" required>
-            <button class="secondary">Өдөр нээх</button>
-        </form>
-    </div>
-
-    <div class="section">
-        <h3>➕ Admin-аар машин нэмэх</h3>
-
-        <form method="POST">
-            <input type="hidden" name="admin_add" value="1">
-
-            <label>Өдөр</label>
-            <input type="date" name="date" required>
-
-            <label>Улсын дугаар</label>
-            <input type="text" name="plate" required>
-
-            <button>Нэмэх</button>
-        </form>
-    </div>
-
-    <div class="footer-link">
-        <a href="/">← Нүүр</a>
-        <a href="/admin-logout">🚪 Admin гарах</a>
-    </div>
-
-</div>
 </body>
+
 </html>

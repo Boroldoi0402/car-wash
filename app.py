@@ -98,7 +98,16 @@ def booking():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user TEXT,
             date TEXT,
-            plate TEXT
+            plate TEXT,
+            services TEXT
+        )
+    """)
+
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS daily_limits (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            date TEXT UNIQUE,
+            max_cars INTEGER
         )
     """)
 
@@ -109,7 +118,7 @@ def booking():
         )
     """)
 
-    MAX_CARS_PER_DAY = 8
+    DEFAULT_MAX = 8   # 🟢 ерөнхий лимит
 
     # =====================
     # POST – захиалга хийх
@@ -117,6 +126,9 @@ def booking():
     if request.method == "POST":
         date_selected = request.form.get("date")
         plate = request.form.get("plate", "").upper().strip()
+        services_list = request.form.getlist("services")
+        services_str = ",".join(services_list)
+
 
         if not date_selected or not plate:
             conn.close()
@@ -137,19 +149,28 @@ def booking():
             conn.close()
             return "❌ Энэ улсын дугаар аль хэдийн захиалагдсан байна"
 
-        # 🚗 өдөрт 8 машин
+        # 🔢 тухайн өдрийн лимит авах
+        cur.execute(
+            "SELECT max_cars FROM daily_limits WHERE date=?",
+            (date_selected,)
+        )
+        row = cur.fetchone()
+        max_limit = row["max_cars"] if row else DEFAULT_MAX
+
+        # 🚗 тухайн өдөр хэдэн машин байгаа вэ
         cur.execute("SELECT COUNT(*) FROM bookings WHERE date=?", (date_selected,))
         count = cur.fetchone()[0]
 
-        if count >= MAX_CARS_PER_DAY:
+        if count >= max_limit:
             conn.close()
-            return "❌ Энэ өдөр хонуулах машин дүүрсэн байна"
+            return f"❌ Энэ өдөр {max_limit} машин авах лимиттэй"
 
         # ✅ insert
         cur.execute(
-            "INSERT INTO bookings (user, date, plate) VALUES (?, ?, ?)",
-            (session["user"], date_selected, plate)
+            "INSERT INTO bookings (user, date, plate, services) VALUES (?, ?, ?, ?)",
+            (session["user"], date_selected, plate, services_str)
         )
+
 
         conn.commit()
         conn.close()
@@ -164,7 +185,12 @@ def booking():
     for i in range(3):
         d = (today + timedelta(days=i)).isoformat()
 
-        # тухайн өдөр хэдэн машин байна
+        # тухайн өдрийн лимит
+        cur.execute("SELECT max_cars FROM daily_limits WHERE date=?", (d,))
+        row = cur.fetchone()
+        max_limit = row["max_cars"] if row else DEFAULT_MAX
+
+        # хэдэн машин байна
         cur.execute("SELECT COUNT(*) FROM bookings WHERE date=?", (d,))
         count = cur.fetchone()[0]
 
@@ -174,8 +200,10 @@ def booking():
 
         days.append({
             "date": d,
-            "full": count >= MAX_CARS_PER_DAY,
-            "blocked": blocked
+            "full": count >= max_limit,
+            "blocked": blocked,
+            "limit": max_limit,
+            "count": count
         })
 
     conn.close()
@@ -241,6 +269,17 @@ def admin():
             FROM bookings
             ORDER BY date
         """)
+
+    # --------- SET DAILY LIMIT ----------
+    if request.method == "POST" and "limit_date" in request.form:
+        cur.execute("""
+            INSERT INTO daily_limits (date, max_cars)
+            VALUES (?, ?)
+            ON CONFLICT(date)
+            DO UPDATE SET max_cars=excluded.max_cars
+        """, (request.form["limit_date"], request.form["max_cars"]))
+    conn.commit()
+
 
     bookings = cur.fetchall()
     conn.close()
